@@ -5,6 +5,9 @@
     height="114"
     viewBox="0 0 114 114"
     fill="none"
+    ref="thisSvg"
+    @mousemove="atMouseMove"
+    @mouseleave="atMouseLeave"
   >
     <circle
       cx="57"
@@ -20,6 +23,7 @@
     />
     <defs>
       <linearGradient
+        ref="circle_grad"
         id="paint0_linear_64_3885"
         x1="27.013"
         y1="7.68273"
@@ -27,10 +31,11 @@
         y2="106.318"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#CCFF00" />
+        <stop ref="circle_grad_stop1" stop-color="#99FF99" offset="0" />
         <stop offset="0.802083" />
       </linearGradient>
       <linearGradient
+        ref="path_grad"
         id="paint1_linear_64_3885"
         x1="41.5"
         y1="42"
@@ -38,10 +43,61 @@
         y2="76"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#CCFF00" />
+        <stop ref="path_grad_stop1" stop-color="#99FF99" />
         <stop offset="1" />
       </linearGradient>
     </defs>
   </svg>
 </template>
-<script setup lang="ts"></script>
+<script setup>
+
+import { ref } from 'vue'
+
+const thisSvg = ref(null);
+const circle_grad = ref(null);
+const circle_grad_stop1 = ref(null);
+
+const path_grad = ref(null);
+const path_grad_stop1 = ref(null);
+
+
+function atMouseMove(e) {
+  const { clientWidth: w, clientHeight: h } = thisSvg.value;
+  const posX1 = (e.offsetX / w)  * 100;
+  const posY1 = (e.offsetY / h) * 100;
+
+  const posX2 = 100 - posX1;
+  const posY2 = 100 - posY1;
+
+  attr(circle_grad, 'x1', `${posX1}%`);
+  attr(circle_grad, 'y1', `${posY1}%`);
+  attr(circle_grad, 'x2', `${posX2}%`);
+  attr(circle_grad, 'y2', `${posY2}%`);
+  attr(circle_grad_stop1, 'stop-color', '#CCFF00');
+
+  attr(path_grad, 'x1', `${posX1}%`);
+  attr(path_grad, 'y1', `${posY1}%`);
+  attr(path_grad, 'x2', `${posX2}%`);
+  attr(path_grad, 'y2', `${posY2}%`);
+  attr(path_grad_stop1, 'stop-color', '#CCFF00');
+}
+
+function atMouseLeave() {
+  attr(circle_grad, 'x1', '27.013');
+  attr(circle_grad, 'y1', '7.68273');
+  attr(circle_grad, 'x2', '99.3783');
+  attr(circle_grad, 'y2', '106.318');
+  attr(circle_grad_stop1, 'stop-color', '#99FF99');
+
+  attr(path_grad, 'x1', '27.013');
+  attr(path_grad, 'y1', '7.68273');
+  attr(path_grad, 'x2', '99.3783');
+  attr(path_grad, 'y2', '106.318');
+  attr(path_grad_stop1, 'stop-color', '#99FF99');
+}
+
+function attr(target, attribute, value) {
+  target.value.setAttribute(attribute, value);
+}
+
+</script>

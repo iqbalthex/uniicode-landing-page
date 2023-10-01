@@ -15,7 +15,7 @@
     <div class="container mx-auto mt-24">
       <div class="flex gap-8">
         <div>
-          <icons-uc-vision />
+          <uc-vision />
         </div>
         <div>
           <h2 class="text-5xl font-bold uppercase">Vision</h2>
@@ -29,7 +29,7 @@
       </div>
       <div class="flex gap-8 mt-14">
         <div>
-          <icons-uc-mission />
+          <!-- <icons-uc-mission /> -->
         </div>
         <div>
           <h2 class="text-5xl font-bold uppercase">Mission</h2>
@@ -43,7 +43,7 @@
       </div>
       <div class="flex gap-8 mt-14">
         <div>
-          <icons-uc-purpose />
+          <!-- <icons-uc-purpose /> -->
         </div>
         <div>
           <h2 class="text-5xl font-bold uppercase">Purpose</h2>
